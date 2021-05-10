@@ -6,6 +6,7 @@ import './styles/app.scss';
 // components
 import Player from './components/player';
 import Song from './components/song';
+import Library from './components/library';
 
 const App = () => {
   // state
@@ -21,6 +22,7 @@ const App = () => {
         isPlaying={isPlaying}
         setIsPlaying={setIsPlaying}
       />
+      <Library songs={songs} />
     </div>
   );
 };

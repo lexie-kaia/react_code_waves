@@ -1,0 +1,67 @@
+.library-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  width: 20rem;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 2px 40px #e6e6e6;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 1rem;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #dbdbdb;
+    border-radius: 1rem;
+  }
+
+  .library-title {
+    padding: 2rem;
+  }
+}
+
+.library-list {
+  height: 150vh;
+}
+
+.library-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  transition: background 200ms;
+
+  &:hover {
+    background: #e7e8e9;
+  }
+
+  img {
+    width: 20%;
+  }
+
+  .item-description {
+    padding-left: 1rem;
+
+    .item-name {
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .item-artist {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #757575;
+    }
+  }
+}
