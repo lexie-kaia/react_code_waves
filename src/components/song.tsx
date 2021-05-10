@@ -1,10 +1,16 @@
 import React from 'react';
+// types
+import { Chillhop } from '../data/chillhop';
 
-const Song = () => (
+type Props = {
+  currentSong: Chillhop;
+};
+
+const Song = ({ currentSong }: Props) => (
   <div className="song-container">
-    <h1>picture</h1>
-    <h1>Song Name</h1>
-    <h1>Artist</h1>
+    <img src={currentSong.cover} alt="" />
+    <h2>{currentSong.name}</h2>
+    <h3>{currentSong.artist}</h3>
   </div>
 );
 
