@@ -11,11 +11,16 @@ const App = () => {
   // state
   const [songs, setSongs] = useState<Chillhop[]>(data());
   const [currentSong, setcurrentSong] = useState<Chillhop>(songs[0]);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
 
   return (
     <div className="App">
       <Song currentSong={currentSong} />
-      <Player />
+      <Player
+        currentSong={currentSong}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+      />
     </div>
   );
 };
