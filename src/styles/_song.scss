@@ -10,11 +10,13 @@
     border-radius: 50%;
   }
 
-  h2 {
+  .song-name {
     padding: 3rem 1rem 1rem 1rem;
   }
 
-  h3 {
+  .song-artist {
     font-size: 1rem;
+    font-weight: 500;
+    color: #757575;
   }
 }

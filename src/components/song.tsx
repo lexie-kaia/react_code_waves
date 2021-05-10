@@ -9,8 +9,8 @@ type Props = {
 const Song = ({ currentSong }: Props) => (
   <div className="song-container">
     <img src={currentSong.cover} alt="" />
-    <h2>{currentSong.name}</h2>
-    <h3>{currentSong.artist}</h3>
+    <h3 className="song-name">{currentSong.name}</h3>
+    <h4 className="song-artist">{currentSong.artist}</h4>
   </div>
 );
 
