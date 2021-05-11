@@ -4,18 +4,19 @@ import { Chillhop } from '../types/types';
 
 type Props = {
   song: Chillhop;
-  onLibraryItemClick: (song: Chillhop) => void;
+  currentSong: Chillhop;
+  selectCurrentSong: (song: Chillhop) => void;
 };
 
-const LibrarySong = ({ song, onLibraryItemClick }: Props) => {
-  const onClick = () => {
-    onLibraryItemClick(song);
+const LibrarySong = ({ song, currentSong, selectCurrentSong }: Props) => {
+  const onLibrarySongClick = () => {
+    selectCurrentSong(song);
   };
 
   return (
     <li
-      className={`library-item ${song.active ? 'selected' : ''}`}
-      onClick={onClick}
+      className={`library-item ${song.id === currentSong.id ? 'selected' : ''}`}
+      onClick={onLibrarySongClick}
     >
       <img src={song.cover} alt="" />
       <div className="item-description">

@@ -6,11 +6,17 @@ import LibrarySong from './library_song';
 
 type Props = {
   songs: Chillhop[];
+  currentSong: Chillhop;
   isLibraryOpen: boolean;
-  onLibraryItemClick: (sont: Chillhop) => void;
+  selectCurrentSong: (sont: Chillhop) => void;
 };
 
-const Library = ({ songs, isLibraryOpen, onLibraryItemClick }: Props) => (
+const Library = ({
+  songs,
+  currentSong,
+  isLibraryOpen,
+  selectCurrentSong,
+}: Props) => (
   <div className={`library-container ${isLibraryOpen ? 'open' : ''}`}>
     <h2 className="library-title">Library</h2>
     <ul className="library-list">
@@ -18,7 +24,8 @@ const Library = ({ songs, isLibraryOpen, onLibraryItemClick }: Props) => (
         <LibrarySong
           key={song.id}
           song={song}
-          onLibraryItemClick={onLibraryItemClick}
+          currentSong={currentSong}
+          selectCurrentSong={selectCurrentSong}
         />
       ))}
     </ul>

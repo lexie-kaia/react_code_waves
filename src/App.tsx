@@ -13,7 +13,7 @@ import Nav from './components/nav';
 
 const App = () => {
   // state
-  const [songs, setSongs] = useState<Chillhop[]>(data());
+  const [songs] = useState<Chillhop[]>(data());
   const [currentSong, setCurrentSong] = useState<Chillhop>(songs[0]);
   const [playInfo, setPlayInfo] = useState<PlayInfo>({
     currentTime: 0,
@@ -51,6 +51,12 @@ const App = () => {
     }
   };
 
+  const selectCurrentSong = (song: Chillhop) => {
+    setCurrentSong(song);
+    setIsLoaded(false);
+    setIsPlaying(false);
+  };
+
   const updateCurrentTime = (currentTime: number) => {
     if (audioRef.current == null) return;
     audioRef.current.currentTime = currentTime;
@@ -67,6 +73,22 @@ const App = () => {
     setPlayInfo({ ...playInfo, currentTime, duration });
   };
 
+  const skipPlay = (direction: 'skip-back' | 'skip-forward'): void => {
+    const currentIndex = songs.findIndex((song) => song.id === currentSong.id);
+    switch (direction) {
+      case 'skip-forward':
+        selectCurrentSong(songs[(currentIndex + 1) % songs.length]);
+        break;
+      case 'skip-back':
+        selectCurrentSong(
+          currentIndex - 1 < 0
+            ? songs[songs.length - 1]
+            : songs[currentIndex - 1]
+        );
+        break;
+    }
+  };
+
   const onLoadedMetaData = (event: SyntheticEvent<HTMLAudioElement>) => {
     updatePlayInfo(event.currentTarget);
     setIsLoaded(true);
@@ -75,12 +97,6 @@ const App = () => {
 
   const onTimeUpdate = (event: SyntheticEvent<HTMLAudioElement>) => {
     updatePlayInfo(event.currentTarget);
-  };
-
-  const onLibraryItemClick = (song: Chillhop) => {
-    setCurrentSong(song);
-    setIsLoaded(false);
-    setIsPlaying(false);
   };
 
   return (
@@ -92,11 +108,13 @@ const App = () => {
         playInfo={playInfo}
         isPlaying={isPlaying}
         updateCurrentTime={updateCurrentTime}
+        skipPlay={skipPlay}
       />
       <Library
         songs={songs}
+        currentSong={currentSong}
         isLibraryOpen={isLibraryOpen}
-        onLibraryItemClick={onLibraryItemClick}
+        selectCurrentSong={selectCurrentSong}
       />
       <audio
         ref={audioRef}

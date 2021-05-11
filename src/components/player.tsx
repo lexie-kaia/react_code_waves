@@ -11,17 +11,19 @@ import {
 import { PlayInfo } from '../types/types';
 
 type Props = {
+  playInfo: PlayInfo;
+  isPlaying: boolean;
   playSong: () => void;
   updateCurrentTime: (currentTime: number) => void;
-  isPlaying: boolean;
-  playInfo: PlayInfo;
+  skipPlay: (direction: 'skip-back' | 'skip-forward') => void;
 };
 
 const Player = ({
+  playInfo,
+  isPlaying,
   playSong,
   updateCurrentTime,
-  isPlaying,
-  playInfo,
+  skipPlay,
 }: Props) => {
   const getTime = (time: number): string => {
     const minutes = `${Math.floor(time / 60)}`;
@@ -29,14 +31,21 @@ const Player = ({
     return `${minutes}:${seconds}`;
   };
 
-  // event handlers
   const onPlayClick = (): void => {
     playSong();
   };
 
-  const onTimeRangeDrag = (event: FormEvent<HTMLInputElement>) => {
+  const onTimeRangeDrag = (event: FormEvent<HTMLInputElement>): void => {
     const currentTime = Number(event.currentTarget.value);
     updateCurrentTime(currentTime);
+  };
+
+  const onSkipBackClick = () => {
+    skipPlay('skip-back');
+  };
+
+  const onSkipForwardClick = () => {
+    skipPlay('skip-forward');
   };
 
   return (
@@ -53,7 +62,12 @@ const Player = ({
         <p>{getTime(playInfo.duration)}</p>
       </div>
       <div className="play-control">
-        <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
+        <FontAwesomeIcon
+          className="skip-back"
+          size="2x"
+          icon={faAngleLeft}
+          onClick={onSkipBackClick}
+        />
         <FontAwesomeIcon
           className="play"
           size="2x"
@@ -64,6 +78,7 @@ const Player = ({
           className="skip-forward"
           size="2x"
           icon={faAngleRight}
+          onClick={onSkipForwardClick}
         />
       </div>
     </div>
