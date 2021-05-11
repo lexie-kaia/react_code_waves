@@ -1,6 +1,6 @@
 import React from 'react';
 // types
-import { Chillhop } from '../data/chillhop';
+import { Chillhop } from '../types/types';
 
 type Props = {
   currentSong: Chillhop;

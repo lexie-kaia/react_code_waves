@@ -1,4 +1,4 @@
-import React, { FormEvent, SyntheticEvent, useRef, useState } from 'react';
+import React, { FormEvent, useState, useRef } from 'react';
 // utils
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -8,70 +8,49 @@ import {
   faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 // types
-import { Chillhop } from '../data/chillhop';
+import { PlayInfo } from '../types/types';
 
 type Props = {
-  currentSong: Chillhop;
+  playSong: () => void;
+  updateCurrentTime: (currentTime: number) => void;
   isPlaying: boolean;
-  setIsPlaying: (isPlaying: boolean) => void;
+  playInfo: PlayInfo;
 };
 
-type SongInfo = {
-  currentTime: number;
-  duration: number;
-};
-
-const getTime = (time: number): string => {
-  return Math.floor(time / 60) + ':' + ('0' + Math.floor(time % 60)).slice(-2);
-};
-
-const Player = ({ currentSong, isPlaying, setIsPlaying }: Props) => {
-  const [songInfo, setSongInfo] = useState<SongInfo>({
-    currentTime: 0,
-    duration: 0,
-  });
-
-  const audioRef = useRef<HTMLAudioElement>(null);
+const Player = ({
+  playSong,
+  updateCurrentTime,
+  isPlaying,
+  playInfo,
+}: Props) => {
+  const getTime = (time: number): string => {
+    const minutes = `${Math.floor(time / 60)}`;
+    const seconds = `0${Math.floor(time % 60)}`.slice(-2);
+    return `${minutes}:${seconds}`;
+  };
 
   // event handlers
   const onPlayClick = (): void => {
-    if (audioRef.current == null) return;
-    if (!isPlaying) {
-      audioRef.current.play();
-    } else {
-      audioRef.current.pause();
-    }
-    setIsPlaying(!isPlaying);
+    playSong();
   };
 
-  const onRangeDrag = (event: FormEvent<HTMLInputElement>) => {
-    if (audioRef.current == null) return;
-
+  const onTimeRangeDrag = (event: FormEvent<HTMLInputElement>) => {
     const currentTime = Number(event.currentTarget.value);
-    audioRef.current.currentTime = currentTime;
-    setSongInfo({ ...songInfo, currentTime });
-  };
-
-  const onAudioLoadedAndTimeUpdated = (
-    event: SyntheticEvent<HTMLAudioElement>
-  ) => {
-    const currentTime = event.currentTarget.currentTime;
-    const duration = event.currentTarget.duration;
-    setSongInfo({ ...songInfo, currentTime, duration });
+    updateCurrentTime(currentTime);
   };
 
   return (
     <div className="player-container">
       <div className="time-control">
-        <p>{getTime(songInfo.currentTime)}</p>
+        <p>{getTime(playInfo.currentTime)}</p>
         <input
           type="range"
           min={0}
-          max={songInfo.duration}
-          value={songInfo.currentTime}
-          onChange={onRangeDrag}
+          max={playInfo.duration}
+          value={playInfo.currentTime}
+          onChange={onTimeRangeDrag}
         />
-        <p>{getTime(songInfo.duration)}</p>
+        <p>{getTime(playInfo.duration)}</p>
       </div>
       <div className="play-control">
         <FontAwesomeIcon className="skip-back" size="2x" icon={faAngleLeft} />
@@ -87,12 +66,6 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }: Props) => {
           icon={faAngleRight}
         />
       </div>
-      <audio
-        ref={audioRef}
-        src={currentSong.audio}
-        onLoadedMetadata={onAudioLoadedAndTimeUpdated}
-        onTimeUpdate={onAudioLoadedAndTimeUpdated}
-      ></audio>
     </div>
   );
 };

@@ -43,7 +43,12 @@
   transition: background 200ms;
 
   &:hover {
-    background: #e7e8e9;
+    background: #fbe9e7;
+  }
+
+  &.selected {
+    background: #ffccbc;
+    box-shadow: 0px 2px 16px 2px #fbe9e7;
   }
 
   img {

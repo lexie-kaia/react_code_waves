@@ -1,14 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-
-export type Chillhop = {
-  name: string;
-  id: string;
-  cover: string;
-  artist: string;
-  audio: string;
-  color: string[];
-  active: boolean;
-};
+import { Chillhop } from '../types/types';
 
 export const data = (): Chillhop[] => {
   return [
