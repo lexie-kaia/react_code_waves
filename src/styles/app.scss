@@ -18,6 +18,18 @@ ul {
   list-style: none;
 }
 
+button {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+
+  &:hover {
+    outline: none;
+  }
+}
+
 @import './song';
 @import './player';
 @import './library';
+@import './nav';

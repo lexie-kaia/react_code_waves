@@ -9,6 +9,7 @@ import './styles/app.scss';
 import Player from './components/player';
 import Song from './components/song';
 import Library from './components/library';
+import Nav from './components/nav';
 
 const App = () => {
   // state
@@ -20,6 +21,7 @@ const App = () => {
   });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isLoadead, setIsLoaded] = useState<boolean>(false);
+  const [isLibraryOpen, setIsLibraryOpen] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -65,8 +67,6 @@ const App = () => {
     setPlayInfo({ ...playInfo, currentTime, duration });
   };
 
-  // event handler
-
   const onLoadedMetaData = (event: SyntheticEvent<HTMLAudioElement>) => {
     updatePlayInfo(event.currentTarget);
     setIsLoaded(true);
@@ -85,14 +85,19 @@ const App = () => {
 
   return (
     <div className="App">
+      <Nav isLibraryOpen={isLibraryOpen} setIsLibraryOpen={setIsLibraryOpen} />
       <Song currentSong={currentSong} />
       <Player
         playSong={playSong}
-        updateCurrentTime={updateCurrentTime}
-        isPlaying={isPlaying}
         playInfo={playInfo}
+        isPlaying={isPlaying}
+        updateCurrentTime={updateCurrentTime}
       />
-      <Library songs={songs} onLibraryItemClick={onLibraryItemClick} />
+      <Library
+        songs={songs}
+        isLibraryOpen={isLibraryOpen}
+        onLibraryItemClick={onLibraryItemClick}
+      />
       <audio
         ref={audioRef}
         src={currentSong.audio}
