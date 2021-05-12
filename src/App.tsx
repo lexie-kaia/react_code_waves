@@ -102,6 +102,10 @@ const App = () => {
     updatePlayInfo(event.currentTarget);
   };
 
+  const onEnded = () => {
+    skipPlay('skip-forward');
+  };
+
   return (
     <div className="App">
       <Nav isLibraryOpen={isLibraryOpen} setIsLibraryOpen={setIsLibraryOpen} />
@@ -125,6 +129,7 @@ const App = () => {
         src={currentSong.audio}
         onLoadedMetadata={onLoadedMetaData}
         onTimeUpdate={onTimeUpdate}
+        onEnded={onEnded}
       ></audio>
     </div>
   );
