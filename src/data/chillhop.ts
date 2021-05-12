@@ -11,7 +11,6 @@ export const data = (): Chillhop[] => {
       artist: 'Aso, Middle School, Aviino',
       audio: 'https://mp3.chillhop.com/serve.php/?mp3=10075',
       color: ['#205950', '#2ab3bf'],
-      active: true,
     },
     {
       name: 'Daylight',
@@ -21,7 +20,6 @@ export const data = (): Chillhop[] => {
       artist: 'Aiguille',
       audio: 'https://mp3.chillhop.com/serve.php/?mp3=9272',
       color: ['#EF8EA9', '#ab417f'],
-      active: false,
     },
     {
       name: 'Keep Going',
@@ -31,7 +29,6 @@ export const data = (): Chillhop[] => {
       artist: 'Swørn',
       audio: 'https://mp3.chillhop.com/serve.php/?mp3=9222',
       color: ['#CD607D', '#c94043'],
-      active: false,
     },
     {
       name: 'Nightfall',
@@ -41,7 +38,6 @@ export const data = (): Chillhop[] => {
       artist: 'Aiguille',
       audio: 'https://mp3.chillhop.com/serve.php/?mp3=9148',
       color: ['#EF8EA9', '#ab417f'],
-      active: false,
     },
     {
       name: 'Reflection',
@@ -51,7 +47,6 @@ export const data = (): Chillhop[] => {
       artist: 'Swørn',
       audio: 'https://mp3.chillhop.com/serve.php/?mp3=9228',
       color: ['#CD607D', '#c94043'],
-      active: false,
     },
     {
       name: 'Under the City Stars',
@@ -61,7 +56,6 @@ export const data = (): Chillhop[] => {
       artist: 'Aso, Middle School, Aviino',
       audio: 'https://mp3.chillhop.com/serve.php/?mp3=10074',
       color: ['#205950', '#2ab3bf'],
-      active: false,
     },
   ];
 };

@@ -22,7 +22,6 @@ const App = () => {
     volume: 0,
   });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [isLoadead, setIsLoaded] = useState<boolean>(false);
   const [isLibraryActive, setIsLibraryActive] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -55,7 +54,6 @@ const App = () => {
 
   const selectCurrentSong = (song: Chillhop) => {
     setCurrentSong(song);
-    setIsLoaded(false);
     setIsPlaying(false);
   };
 
@@ -94,7 +92,6 @@ const App = () => {
 
   const onLoadedMetaData = (event: SyntheticEvent<HTMLAudioElement>) => {
     updatePlayInfo(event.currentTarget);
-    setIsLoaded(true);
     playSongPromise();
   };
 

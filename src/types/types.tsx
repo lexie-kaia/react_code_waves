@@ -5,7 +5,6 @@ export type Chillhop = {
   artist: string;
   audio: string;
   color: string[];
-  active: boolean;
 };
 
 export type PlayInfo = {
