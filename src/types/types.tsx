@@ -11,4 +11,6 @@ export type Chillhop = {
 export type PlayInfo = {
   currentTime: number;
   duration: number;
+  animationPercentage: number;
+  volume: number;
 };

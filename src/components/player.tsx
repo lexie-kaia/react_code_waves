@@ -8,9 +8,10 @@ import {
   faPlay,
 } from '@fortawesome/free-solid-svg-icons';
 // types
-import { PlayInfo } from '../types/types';
+import { Chillhop, PlayInfo } from '../types/types';
 
 type Props = {
+  currentSong: Chillhop;
   playInfo: PlayInfo;
   isPlaying: boolean;
   playSong: () => void;
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const Player = ({
+  currentSong,
   playInfo,
   isPlaying,
   playSong,
@@ -48,17 +50,28 @@ const Player = ({
     skipPlay('skip-forward');
   };
 
+  const trackBackground = {
+    background: `linear-gradient(to right, ${currentSong.color[0]}, ${currentSong.color[1]})`,
+  };
+
+  const trackAnim = {
+    transform: `translateX(${playInfo.animationPercentage}%)`,
+  };
+
   return (
     <div className="player-container">
       <div className="time-control">
         <p>{getTime(playInfo.currentTime)}</p>
-        <input
-          type="range"
-          min={0}
-          max={playInfo.duration}
-          value={playInfo.currentTime}
-          onChange={onTimeRangeDrag}
-        />
+        <div className="input-container" style={trackBackground}>
+          <input
+            type="range"
+            min={0}
+            max={playInfo.duration}
+            value={playInfo.currentTime}
+            onChange={onTimeRangeDrag}
+          />
+          <div className="input-track" style={trackAnim}></div>
+        </div>
         <p>{getTime(playInfo.duration)}</p>
       </div>
       <div className="play-control">

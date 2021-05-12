@@ -18,6 +18,8 @@ const App = () => {
   const [playInfo, setPlayInfo] = useState<PlayInfo>({
     currentTime: 0,
     duration: 0,
+    animationPercentage: 0,
+    volume: 0,
   });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isLoadead, setIsLoaded] = useState<boolean>(false);
@@ -70,7 +72,8 @@ const App = () => {
     const duration = Number.isNaN(audioElement.duration)
       ? 0
       : audioElement.duration;
-    setPlayInfo({ ...playInfo, currentTime, duration });
+    const animationPercentage = Math.round((currentTime / duration) * 100);
+    setPlayInfo({ ...playInfo, currentTime, duration, animationPercentage });
   };
 
   const skipPlay = (direction: 'skip-back' | 'skip-forward'): void => {
@@ -104,9 +107,10 @@ const App = () => {
       <Nav isLibraryOpen={isLibraryOpen} setIsLibraryOpen={setIsLibraryOpen} />
       <Song currentSong={currentSong} />
       <Player
-        playSong={playSong}
+        currentSong={currentSong}
         playInfo={playInfo}
         isPlaying={isPlaying}
+        playSong={playSong}
         updateCurrentTime={updateCurrentTime}
         skipPlay={skipPlay}
       />
