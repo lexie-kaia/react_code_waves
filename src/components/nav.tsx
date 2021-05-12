@@ -1,13 +1,13 @@
 import React from 'react';
 
 type Props = {
-  isLibraryOpen: boolean;
-  setIsLibraryOpen: (isLibraryOpen: boolean) => void;
+  isLibraryActive: boolean;
+  setIsLibraryActive: (isLibraryActive: boolean) => void;
 };
 
-const Nav = ({ isLibraryOpen, setIsLibraryOpen }: Props) => {
+const Nav = ({ isLibraryActive, setIsLibraryActive }: Props) => {
   const onClick = () => {
-    setIsLibraryOpen(!isLibraryOpen);
+    setIsLibraryActive(!isLibraryActive);
   };
 
   return (

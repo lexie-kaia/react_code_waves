@@ -29,6 +29,21 @@ button {
   }
 }
 
+.app {
+  transition: all 500ms ease;
+  &.libraryActive {
+    margin-left: 20rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .app {
+    &.libraryActive {
+      margin-left: 0;
+    }
+  }
+}
+
 @import './song';
 @import './player';
 @import './library';

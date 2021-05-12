@@ -18,3 +18,13 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .nav-container {
+    padding: 0 1rem;
+
+    button {
+      z-index: 10;
+    }
+  }
+}

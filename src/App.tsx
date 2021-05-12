@@ -23,7 +23,7 @@ const App = () => {
   });
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isLoadead, setIsLoaded] = useState<boolean>(false);
-  const [isLibraryOpen, setIsLibraryOpen] = useState<boolean>(false);
+  const [isLibraryActive, setIsLibraryActive] = useState<boolean>(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -107,8 +107,11 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <Nav isLibraryOpen={isLibraryOpen} setIsLibraryOpen={setIsLibraryOpen} />
+    <div className={`app ${isLibraryActive ? 'libraryActive' : ''}`}>
+      <Nav
+        isLibraryActive={isLibraryActive}
+        setIsLibraryActive={setIsLibraryActive}
+      />
       <Song currentSong={currentSong} />
       <Player
         currentSong={currentSong}
@@ -121,7 +124,7 @@ const App = () => {
       <Library
         songs={songs}
         currentSong={currentSong}
-        isLibraryOpen={isLibraryOpen}
+        isLibraryActive={isLibraryActive}
         selectCurrentSong={selectCurrentSong}
       />
       <audio

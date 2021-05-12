@@ -20,3 +20,11 @@
     color: #757575;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .song-container {
+    img {
+      width: 70%;
+    }
+  }
+}

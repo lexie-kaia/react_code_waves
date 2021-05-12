@@ -7,17 +7,17 @@ import LibrarySong from './library_song';
 type Props = {
   songs: Chillhop[];
   currentSong: Chillhop;
-  isLibraryOpen: boolean;
+  isLibraryActive: boolean;
   selectCurrentSong: (sont: Chillhop) => void;
 };
 
 const Library = ({
   songs,
   currentSong,
-  isLibraryOpen,
+  isLibraryActive,
   selectCurrentSong,
 }: Props) => (
-  <div className={`library-container ${isLibraryOpen ? 'open' : ''}`}>
+  <div className={`library-container ${isLibraryActive ? 'active' : ''}`}>
     <h2 className="library-title">Library</h2>
     <ul className="library-list">
       {songs.map((song) => (
